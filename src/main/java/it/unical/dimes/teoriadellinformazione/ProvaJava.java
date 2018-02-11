@@ -51,6 +51,6 @@ public class ProvaJava {
 
 		Matrix y = yCbCrImage.y();
 		Matrix cb = yCbCrImage.cb();
-		Matrix cbcr = yCbCrImage.cbcr();
+		Matrix cr = yCbCrImage.cr();
 	}
 }
