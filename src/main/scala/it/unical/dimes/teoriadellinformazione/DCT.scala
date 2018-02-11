@@ -1,4 +1,5 @@
-import default._
+package it.unical.dimes.teoriadellinformazione
+import teoriadellinformazione._
 object DCT {
   def discreteCosineTransform(m: Matrix[Float], u: Int, v: Int, startY: Int, startX: Int) = {
     import Math.{ cos, PI }

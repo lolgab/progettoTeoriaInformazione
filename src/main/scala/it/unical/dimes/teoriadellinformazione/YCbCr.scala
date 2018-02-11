@@ -1,3 +1,5 @@
+package it.unical.dimes.teoriadellinformazione
+
 import Math.round
 case class YCbCr(y: Float, cb: Float, cr: Float) {
   def toRGB: RGB = RGB(

@@ -1,4 +1,6 @@
-case class RGB(value: Int) extends AnyVal {
+package it.unical.dimes.teoriadellinformazione
+
+case class RGB(value: Int) /*extends AnyVal*/ {
   def r = (value >> 16) & 0xff
   def g = (value >> 8) & 0xff
   def b = value & 0xff

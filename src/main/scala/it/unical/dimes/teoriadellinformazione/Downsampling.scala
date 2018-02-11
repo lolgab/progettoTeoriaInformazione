@@ -1,3 +1,5 @@
+package it.unical.dimes.teoriadellinformazione
+
 object Downsampling {
   def fourTwoTwo(m: Matrix[Float]): Matrix[Float] = {
     val res = new MutableMatrix[Float](m.rows, m.cols / 2)
