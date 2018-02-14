@@ -4,7 +4,10 @@ import utest._
 
 object HammingTest extends TestSuite {
   implicit def toBoolean(i: Int) = i != 0
+  implicit def toInt(b: Boolean) = if(b) 1 else 0
   import Hamming._
+  def swapBit(d: Data, index: Int): Unit = d(index) = !d(index)
+
   val tests = Tests {
     "r dovrebbe essere 3 per n = 4: Hamming(7,4)" - {
       val n = 4
@@ -23,6 +26,41 @@ object HammingTest extends TestSuite {
       val inserted: List[Boolean] = List(0,1,1,1,0,0,1,0,1,0,1,0)
       val calculated = encode(data).toList
       assert(calculated == calculated)
+    }
+
+    "encode e decode dovrebbero coincidere" - {
+      val data: Data = Array(1,1,1,0,1,0,1,0,1,0,0,0,0,1,0,1,1,0)
+      val encoded = encode(data)
+      val decoded = decode(encoded).toList.map(_.toInt)
+      val dataList = data.toList.map(_.toInt)
+      assert(dataList == decoded)
+    }
+
+    "encode e decode array generati random" - {
+      import scala.util.Random
+      for(j <- 1 until 100) {
+        val data: Data = new Array(Random.nextInt(1000))
+        for(i <- 0 until data.length) data(i) = Random.nextBoolean
+        val encoded = encode(data)
+        val decoded = decode(encoded).toList.map(_.toInt)
+        val dataList = data.toList.map(_.toInt)
+        assert(dataList == decoded)
+      }
+    }
+
+    "encode e decode con swap di un bit array generati random" - {
+      import scala.util.Random
+      for(j <- 1 until 100) {
+        val length = Random.nextInt(100) + 1
+        val data: Data = new Array(length)
+        for(i <- 0 until data.length) data(i) = Random.nextBoolean
+        val encoded = encode(data)
+        val swappedIndex = Random.nextInt(length)
+        swapBit(encoded, 2)  // swap a random bit
+        val decoded = decode(encoded).toList.map(_.toInt)
+        val dataList = data.toList.map(_.toInt)
+        assert(dataList == decoded)
+      }
     }
   }
 }
