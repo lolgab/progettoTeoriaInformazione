@@ -2,7 +2,6 @@ package it.unical.dimes.teoriadellinformazione
 
 object Hamming {
   type Data = Array[Boolean]
-
   def r(n: Int): Int = {
     def loop(r: Int): Int = if(n + r + 1 <= (1 << r)) r else loop(r + 1)
     loop(1)
