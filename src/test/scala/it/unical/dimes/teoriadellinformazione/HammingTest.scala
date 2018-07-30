@@ -40,11 +40,7 @@ object HammingTest extends TestSuite {
       import scala.util.Random
       for(j <- 1 until 100) {
         val data: Data = new Array(Random.nextInt(1000))
-<<<<<<< HEAD
-        for(i <- data.indices) data(i) = Random.nextBoolean
-=======
         for(i <- 0 until data.length) data(i) = Random.nextBoolean
->>>>>>> b650502df22514c95b72e04998424a8224a9d98e
         val encoded = encode(data)
         val decoded = decode(encoded).toList.map(_.toInt)
         val dataList = data.toList.map(_.toInt)
@@ -52,28 +48,16 @@ object HammingTest extends TestSuite {
       }
     }
 
-<<<<<<< HEAD
     "encode e decode con swap di un bit dei dati. Array generati random" - {
       import scala.util.Random
       for(j <- 1 until 1000) {
         val length = Random.nextInt(1000) + 1
         val data: Data = new Array(length)
-        for(i <- data.indices) data(i) = Random.nextBoolean
+        for(i <- 0 until data.length) data(i) = Random.nextBoolean
         val encoded = encode(data)
         val (pI, dI) = parityDataIndexes(encoded.length)
         val swappedIndex = dI(Random.nextInt(dI.length))
         swapBit(encoded, swappedIndex)  // swap a random bit
-=======
-    "encode e decode con swap di un bit array generati random" - {
-      import scala.util.Random
-      for(j <- 1 until 100) {
-        val length = Random.nextInt(100) + 1
-        val data: Data = new Array(length)
-        for(i <- 0 until data.length) data(i) = Random.nextBoolean
-        val encoded = encode(data)
-        val swappedIndex = Random.nextInt(length)
-        swapBit(encoded, 2)  // swap a random bit
->>>>>>> b650502df22514c95b72e04998424a8224a9d98e
         val decoded = decode(encoded).toList.map(_.toInt)
         val dataList = data.toList.map(_.toInt)
         assert(dataList == decoded)
