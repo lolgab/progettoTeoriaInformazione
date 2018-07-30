@@ -40,7 +40,7 @@ object HammingTest extends TestSuite {
       import scala.util.Random
       for(j <- 1 until 100) {
         val data: Data = new Array(Random.nextInt(1000))
-        for(i <- 0 until data.length) data(i) = Random.nextBoolean
+        for(i <- data.indices) data(i) = Random.nextBoolean
         val encoded = encode(data)
         val decoded = decode(encoded).toList.map(_.toInt)
         val dataList = data.toList.map(_.toInt)
@@ -53,7 +53,7 @@ object HammingTest extends TestSuite {
       for(j <- 1 until 1000) {
         val length = Random.nextInt(1000) + 1
         val data: Data = new Array(length)
-        for(i <- 0 until data.length) data(i) = Random.nextBoolean
+        for(i <- data.indices) data(i) = Random.nextBoolean
         val encoded = encode(data)
         val (pI, dI) = parityDataIndexes(encoded.length)
         val swappedIndex = dI(Random.nextInt(dI.length))

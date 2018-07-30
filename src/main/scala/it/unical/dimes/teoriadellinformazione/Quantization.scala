@@ -21,7 +21,7 @@ object Quantization {
                     quantizationMatrix: Matrix[Int]): Matrix[Int] = {
     val res = new MutableMatrix[Int](rowLength, colLength)
     for (i <- 0 until rowLength; j <- 0 until colLength)
-      res(i, j) = round(block(i, j) * quantizationMatrix(i, j)).toInt
+      res(i, j) = round(block(i, j) / quantizationMatrix(i, j)).toInt
     res.toMatrix
   }
 }

@@ -13,7 +13,7 @@ object Hamming {
   def parityBit(i: Int, data: Data, dataIndexes: Seq[Int]): Boolean =
     dataIndexes.filter((j: Int) => (j & (i + 1)) != 0).count(data(_) == true) % 2 != 0
   def toInt(parities: Seq[Boolean], parityIndexes: Seq[Int]): Int =
-    0.until(parities.length).foldLeft(0)((sum, i) => if(parities(i)) sum | (parityIndexes(i) + 1) else sum)
+    parities.indices.foldLeft(0)((sum, i) => if(parities(i)) sum | (parityIndexes(i) + 1) else sum)
 
   def encode(data: Data): Data = {
     val totalBits = data.length + r(data.length)
