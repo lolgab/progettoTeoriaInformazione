@@ -15,33 +15,14 @@ object Main2 {
       val byte1 = imgPiccola.read()
       val byte2 = imgPiccola.read()
 
-        imgGrande.setRGB(i, j, (imgGrande.getRGB(i, j) & 0xFFFFFFF7) | (byte & 1))
-        imgGrande.setRGB(i, j + 1, (imgGrande.getRGB(i, j + 1) & 0xFFFFFFF7) | ((byte >> 1) & 1))
-        imgGrande.setRGB(i, j + 2, (imgGrande.getRGB(i, j + 2) & 0xFFFFFFF7) | ((byte >> 2) & 1))
-        imgGrande.setRGB(i, j + 3, (imgGrande.getRGB(i, j + 3) & 0xFFFFFFF7) | ((byte >> 3) & 1))
-        imgGrande.setRGB(i, j + 4, (imgGrande.getRGB(i, j + 4) & 0xFFFFFFF7) | ((byte >> 4) & 1))
-        imgGrande.setRGB(i, j + 5, (imgGrande.getRGB(i, j + 5) & 0xFFFFFFF7) | ((byte >> 5) & 1))
-        imgGrande.setRGB(i, j + 6, (imgGrande.getRGB(i, j + 6) & 0xFFFFFFF7) | ((byte >> 6) & 1))
-        imgGrande.setRGB(i, j + 7, (imgGrande.getRGB(i, j + 7) & 0xFFFFFFF7) | ((byte >> 7) & 1))
+      val rgb = imgGrande.getRGB(i, j)
 
-        imgGrande.setRGB(i, j, (imgGrande.getRGB(i, j) & 0xFFFFF7FF) | (byte & 1))
-        imgGrande.setRGB(i, j + 1, (imgGrande.getRGB(i, j + 1) & 0xFFFFF7FF) | ((byte >> 1) & 1))
-        imgGrande.setRGB(i, j + 2, (imgGrande.getRGB(i, j + 2) & 0xFFFFF7FF) | ((byte >> 2) & 1))
-        imgGrande.setRGB(i, j + 3, (imgGrande.getRGB(i, j + 3) & 0xFFFFF7FF) | ((byte >> 3) & 1))
-        imgGrande.setRGB(i, j + 4, (imgGrande.getRGB(i, j + 4) & 0xFFFFF7FF) | ((byte >> 4) & 1))
-        imgGrande.setRGB(i, j + 5, (imgGrande.getRGB(i, j + 5) & 0xFFFFF7FF) | ((byte >> 5) & 1))
-        imgGrande.setRGB(i, j + 6, (imgGrande.getRGB(i, j + 6) & 0xFFFFF7FF) | ((byte >> 6) & 1))
-        imgGrande.setRGB(i, j + 7, (imgGrande.getRGB(i, j + 7) & 0xFFFFF7FF) | ((byte >> 7) & 1))
-
-        imgGrande.setRGB(i, j, (imgGrande.getRGB(i, j) & 0xFFF7FFFF) | (byte & 1))
-        imgGrande.setRGB(i, j + 1, (imgGrande.getRGB(i, j + 1) & 0xFFF7FFFF) | ((byte >> 1) & 1))
-        imgGrande.setRGB(i, j + 2, (imgGrande.getRGB(i, j + 2) & 0xFFF7FFFF) | ((byte >> 2) & 1))
-        imgGrande.setRGB(i, j + 3, (imgGrande.getRGB(i, j + 3) & 0xFFF7FFFF) | ((byte >> 3) & 1))
-        imgGrande.setRGB(i, j + 4, (imgGrande.getRGB(i, j + 4) & 0xFFF7FFFF) | ((byte >> 4) & 1))
-        imgGrande.setRGB(i, j + 5, (imgGrande.getRGB(i, j + 5) & 0xFFF7FFFF) | ((byte >> 5) & 1))
-        imgGrande.setRGB(i, j + 6, (imgGrande.getRGB(i, j + 6) & 0xFFF7FFFF) | ((byte >> 6) & 1))
-        imgGrande.setRGB(i, j + 7, (imgGrande.getRGB(i, j + 7) & 0xFFF7FFFF) | ((byte >> 7) & 1))
-
+      for (k <- 0 until 8) {
+        imgGrande.setRGB(
+          i,
+          j + k,
+          (rgb & 0xFFF7F7F7) | ((byte >> k) & 1) | (((byte1 >> k) & 1) << 8) | (((byte2 >> k) & 1) << 16))
+      }
     }
 
     ImageIO.write(imgGrande, "jpg", new File("gattoNew.jpg"))
